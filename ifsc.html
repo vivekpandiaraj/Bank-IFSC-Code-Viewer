@@ -1,275 +1,352 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>IFSC Code Viewer</title>
-    <link
-      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
-      rel="stylesheet"
-      id="bootstrap-css"
-    />
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
-    />
-    <style type="text/css">
-      body {
-        font-family: "Poppins", sans-serif;
-        height: 100vh;
-        background: rgb(94, 89, 176);
-        background: linear-gradient(
-          90deg,
-          rgb(193, 215, 224) 0%,
-          rgba(193, 214, 220, 1) 12%,
-          rgba(73, 186, 245, 1) 65%,
-          rgba(0, 212, 255, 1) 100%
-        );
-      }
-      a {
-        color: #92badd;
-        display: inline-block;
-        text-decoration: none;
-        font-weight: 400;
-      }
-      h2 {
-        text-align: center;
-        font-size: 16px;
-        font-weight: 600;
-        text-transform: uppercase;
-        display: inline-block;
-        margin: 40px 8px 10px 8px;
-        color: #1313ab;
-      }
-      .wrapper {
-        display: flex;
-        align-items: center;
-        flex-direction: column;
-        justify-content: center;
-        width: 100%;
-        min-height: 100%;
-        padding: 24px;
-      }
-      #formContent {
-        -webkit-border-radius: 10px 10px 10px 10px;
-        border-radius: 10px 10px 10px 10px;
-        background: #fff;
-        padding: 30px;
-        width: 90%;
-        max-width: 600px;
-        position: relative;
-        padding: 0px;
-        -webkit-box-shadow: 0 30px 60px 0 rgba(0, 0, 0, 0.3);
-        box-shadow: 0 30px 60px 0 rgba(0, 0, 0, 0.3);
-        text-align: center;
-      }
 
-      input[type="text"] {
-        background-color: #f6f6f6;
-        text-transform: uppercase;
-        border: none;
-        color: #0d0d0d;
-        padding: 15px 32px;
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
-        font-size: 16px;
-        margin: 5px;
-        width: 85%;
-        border: 2px solid #f6f6f6;
-        -webkit-transition: all 0.5s ease-in-out;
-        -moz-transition: all 0.5s ease-in-out;
-        -ms-transition: all 0.5s ease-in-out;
-        -o-transition: all 0.5s ease-in-out;
-        transition: all 0.5s ease-in-out;
-        -webkit-border-radius: 5px 5px 5px 5px;
-        border-radius: 5px 5px 5px 5px;
-      }
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IFSC Code Viewer</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      --glass-bg: rgba(255, 255, 255, 0.95);
+      --card-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    }
 
-      input[type="text"]:focus {
-        background-color: #fff;
-        border-bottom: 2px solid #1313ab;
-      }
+    body {
+      font-family: 'Outfit', sans-serif;
+      background: var(--primary-gradient);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0;
+      padding: 20px;
+    }
 
-      input[type="text"]:placeholder {
-        color: #cccccc;
-      }
-      .fadeInDown {
-        -webkit-animation-name: fadeInDown;
-        animation-name: fadeInDown;
-        -webkit-animation-duration: 1s;
-        animation-duration: 1s;
-        -webkit-animation-fill-mode: both;
-        animation-fill-mode: both;
-      }
-      @-webkit-keyframes fadeInDown {
-        0% {
-          opacity: 0;
-          -webkit-transform: translate3d(0, -100%, 0);
-          transform: translate3d(0, -100%, 0);
-        }
-        100% {
-          opacity: 1;
-          -webkit-transform: none;
-          transform: none;
-        }
-      }
+    .main-container {
+      background: var(--glass-bg);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border-radius: 20px;
+      box-shadow: var(--card-shadow);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      width: 100%;
+      max-width: 600px;
+      padding: 2rem;
+      animation: slideIn 0.6s ease-out;
+    }
 
-      @keyframes fadeInDown {
-        0% {
-          opacity: 0;
-          -webkit-transform: translate3d(0, -100%, 0);
-          transform: translate3d(0, -100%, 0);
-        }
-        100% {
-          opacity: 1;
-          -webkit-transform: none;
-          transform: none;
-        }
-      }
-
-      @-webkit-keyframes fadeIn {
-        from {
-          opacity: 0;
-        }
-        to {
-          opacity: 1;
-        }
-      }
-      @-moz-keyframes fadeIn {
-        from {
-          opacity: 0;
-        }
-        to {
-          opacity: 1;
-        }
-      }
-      @keyframes fadeIn {
-        from {
-          opacity: 0;
-        }
-        to {
-          opacity: 1;
-        }
-      }
-
-      .fadeIn {
+    @keyframes slideIn {
+      from {
         opacity: 0;
-        -webkit-animation: fadeIn ease-in 1;
-        -moz-animation: fadeIn ease-in 1;
-        animation: fadeIn ease-in 1;
-
-        -webkit-animation-fill-mode: forwards;
-        -moz-animation-fill-mode: forwards;
-        animation-fill-mode: forwards;
-
-        -webkit-animation-duration: 1s;
-        -moz-animation-duration: 1s;
-        animation-duration: 1s;
+        transform: translateY(20px);
       }
 
-      .fadeIn.first {
-        -webkit-animation-delay: 0.4s;
-        -moz-animation-delay: 0.4s;
-        animation-delay: 0.4s;
-        margin-top: 10%;
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .app-header {
+      text-align: center;
+      margin-bottom: 2rem;
+      color: #4a4a4a;
+    }
+
+    .app-header i {
+      font-size: 3rem;
+      background: var(--primary-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 1rem;
+    }
+
+    .app-header h1 {
+      font-weight: 700;
+      font-size: 1.8rem;
+      margin: 0;
+      color: #2d3748;
+    }
+
+    .search-box {
+      position: relative;
+      margin-bottom: 2rem;
+    }
+
+    .form-control {
+      border: 2px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 1rem 1.5rem;
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+      box-shadow: none;
+      text-transform: uppercase;
+      font-weight: 600;
+      letter-spacing: 1px;
+      color: #4a5568;
+    }
+
+    .form-control:focus {
+      border-color: #667eea;
+      box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+    }
+
+    .form-control::placeholder {
+      text-transform: none;
+      color: #a0aec0;
+      font-weight: 400;
+      letter-spacing: normal;
+    }
+
+    .search-icon {
+      position: absolute;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #a0aec0;
+      pointer-events: none;
+    }
+
+    .result-card {
+      background: white;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      opacity: 0;
+      transform: translateY(10px);
+      transition: all 0.4s ease;
+      display: none;
+    }
+
+    .result-card.show {
+      opacity: 1;
+      transform: translateY(0);
+      display: block;
+    }
+
+    .card-header-custom {
+      background: var(--primary-gradient);
+      padding: 1.5rem;
+      color: white;
+    }
+
+    .bank-name {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .card-body-custom {
+      padding: 1.5rem;
+    }
+
+    .info-row {
+      display: flex;
+      margin-bottom: 1rem;
+      border-bottom: 1px solid #f0f0f0;
+      padding-bottom: 0.8rem;
+    }
+
+    .info-row:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+      margin-bottom: 0;
+    }
+
+    .info-label {
+      width: 120px;
+      font-weight: 600;
+      color: #718096;
+      flex-shrink: 0;
+    }
+
+    .info-value {
+      color: #2d3748;
+      font-weight: 500;
+    }
+
+    .error-message {
+      color: #e53e3e;
+      text-align: center;
+      padding: 1rem;
+      background: #fff5f5;
+      border-radius: 12px;
+      border: 1px solid #feb2b2;
+      display: none;
+      animation: shake 0.5s cubic-bezier(.36, .07, .19, .97) both;
+    }
+
+    @keyframes shake {
+
+      10%,
+      90% {
+        transform: translate3d(-1px, 0, 0);
       }
 
-      .fadeIn.second {
-        -webkit-animation-delay: 0.6s;
-        -moz-animation-delay: 0.6s;
-        animation-delay: 0.6s;
-      }
-      .underlineHover:after {
-        display: block;
-        left: 0;
-        bottom: -10px;
-        width: 0;
-        height: 2px;
-        background-color: #56baed;
-        content: "";
-        transition: width 0.2s;
+      20%,
+      80% {
+        transform: translate3d(2px, 0, 0);
       }
 
-      .underlineHover:hover {
-        color: #0d0d0d;
+      30%,
+      50%,
+      70% {
+        transform: translate3d(-4px, 0, 0);
       }
 
-      .underlineHover:hover:after {
-        width: 100%;
+      40%,
+      60% {
+        transform: translate3d(4px, 0, 0);
       }
+    }
 
-      h1 {
-        color: #1313ab;
-      }
-      *:focus {
-        outline: none;
-      }
-      .fa {
-        color: #1313ab;
-      }
-      .result {
-        margin: 15%;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="wrapper fadeInDown">
-      <div id="formContent">
-        <div class="fadeIn first">
-          <i class="fa fa-university fa-3x"></i>
-          <h1>Bank IFSC Code Viewer</h1>
-        </div>
+    .loading-spinner {
+      display: none;
+      justify-content: center;
+      margin: 2rem 0;
+    }
 
-        <form>
-            <label for="ifsccode"> Enter 11 Digit IFSC Code</label>
-          <input
-            autofocus="true"
-            type="text"
-            id="ifsccode"
-            max="11"
-            class="fadeIn second"
-            name="ifsc"
-            placeholder="Enter Your Bank IFSC Code"
-          />
-          <div class="result" id="result">
+    .contact-pill {
+      background: #edf2f7;
+      padding: 2px 10px;
+      border-radius: 20px;
+      font-size: 0.9em;
+    }
+  </style>
+</head>
 
-          </div>
-        </form>
+<body>
+
+  <div class="main-container">
+    <header class="app-header">
+      <i class="fas fa-university"></i>
+      <h1>IFSC Lookup</h1>
+      <p class="text-muted mt-2">Find generic bank details instantly</p>
+    </header>
+
+    <div class="search-box">
+      <input type="text" id="ifscInput" class="form-control" placeholder="Enter 11-digit IFSC Code" maxlength="11"
+        autocomplete="off">
+      <i class="fas fa-search search-icon"></i>
+    </div>
+
+    <div id="loading" class="loading-spinner">
+      <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Loading...</span>
       </div>
     </div>
-<script type="text/javascript">
-$(document).ready(function(){
-  $("#ifsccode").on('input',function(){
-  var id=$(this).val();
-    if(id.length >= 11){
 
-        $.get("https://ifsc.razorpay.com/"+id, function(data, status){
-           
-            $('#result').html("<table class=' bg-info table table-bordered'>"+
-                "<tr><td>Bank Name:</td><td> "+ data.BANK +"</td></tr>"+
-                "<tr><td>Branch: </td><td>"+ data.BRANCH +"</td></tr>"+
-                "<tr><td>City: </td><td>"+ data.CITY +"</td></tr>"+
-                "<tr><td>District: </td><td>"+ data.DISTRICT +"</td></tr>"+
-                "<tr><td>State: </td><td>"+ data.STATE +"</td></tr>"+
-                "<tr><td>Full Address: </td><td>"+ data.ADDRESS +"</td></tr>"+
-                "<tr><td>Contact:</td><td> "+ data.CONTACT +"</td></tr>"+
-                "<tr><td>MICR Code: </td><td>"+ data.MICR +"</td></tr></table>"
-            );
-            console.log(data);
+    <div id="errorMessage" class="error-message">
+      <i class="fas fa-exclamation-circle me-2"></i> <span>Invalid IFSC Code</span>
+    </div>
+
+    <div id="resultCard" class="result-card">
+      <div class="card-header-custom">
+        <h3 class="bank-name" id="bankName"><i class="fas fa-building"></i> <span>Bank Name</span></h3>
+      </div>
+      <div class="card-body-custom">
+        <div class="info-row">
+          <span class="info-label">Branch</span>
+          <span class="info-value" id="branchName">--</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">City</span>
+          <span class="info-value" id="cityName">--</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">District</span>
+          <span class="info-value" id="districtName">--</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">State</span>
+          <span class="info-value" id="stateName">--</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Address</span>
+          <span class="info-value" id="addressText">--</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Contact</span>
+          <span class="info-value" id="contactInfo">--</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">MICR</span>
+          <div class="info-value"><span class="badge bg-secondary" id="micrCode">--</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const ifscInput = document.getElementById('ifscInput');
+      const resultCard = document.getElementById('resultCard');
+      const errorMessage = document.getElementById('errorMessage');
+      const loading = document.getElementById('loading');
+
+      let debounceTimer;
+
+      ifscInput.addEventListener('input', (e) => {
+        const code = e.target.value.trim().toUpperCase();
+
+        clearTimeout(debounceTimer);
+
+        resultCard.classList.remove('show');
+        errorMessage.style.display = 'none';
+
+        if (code.length !== 11) {
+          return;
+        }
+
+        debounceTimer = setTimeout(() => {
+          fetchBankDetails(code);
+        }, 500);
+      });
+
+      async function fetchBankDetails(code) {
+        loading.style.display = 'flex';
+        errorMessage.style.display = 'none';
+
+        try {
+          const response = await fetch(`https://ifsc.razorpay.com/${code}`);
+
+          if (!response.ok) {
+            throw new Error('Invalid Code');
+          }
+
+          const data = await response.json();
+          displayResult(data);
+
+        } catch (error) {
+          errorMessage.style.display = 'block';
+          errorMessage.querySelector('span').textContent = 'Invalid IFSC Code or Details Not Found';
+        } finally {
+          loading.style.display = 'none';
+        }
+      }
+
+      function displayResult(data) {
+        document.getElementById('bankName').innerHTML = `<i class="fas fa-building"></i> ${data.BANK}`;
+        document.getElementById('branchName').textContent = data.BRANCH;
+        document.getElementById('cityName').textContent = data.CITY;
+        document.getElementById('districtName').textContent = data.DISTRICT;
+        document.getElementById('stateName').textContent = data.STATE;
+        document.getElementById('addressText').textContent = data.ADDRESS;
+        document.getElementById('contactInfo').innerHTML = data.CONTACT ? `<span class="contact-pill">${data.CONTACT}</span>` : 'N/A';
+        document.getElementById('micrCode').textContent = data.MICR || 'N/A';
+
+        resultCard.classList.add('show');
+      }
     });
-    }else{
-        $('#result').html("Invalid IFSC Code. Enter 11 Digit IFSC Code.");
+  </script>
+</body>
 
-    }
-   
-  });
-  Function
-});
-
-</script>
-  </body>
 </html>
